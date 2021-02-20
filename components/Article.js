@@ -86,6 +86,19 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Lambda school is cool!',
+    date: 'Feb 10th, 2021',
+    firstParagraph: `Lambda school is cool! Lambda school is cool! Lambda school is cool! Lambda school is cool! 
+    Lambda school is cool! Lambda school is cool! Lambda school is cool! Lambda school is cool! 
+    Lambda school is cool! Lambda school is cool! Lambda school is cool! Lambda school is cool! `,
+    secondParagraph: `Lambda school is cool! Lambda school is cool! Lambda school is cool! Lambda school is cool! 
+    Lambda school is cool! Lambda school is cool! Lambda school is cool! Lambda school is cool! 
+    Lambda school is cool! Lambda school is cool! Lambda school is cool! Lambda school is cool! `,
+    thirdParagraph: `Lambda school is cool! Lambda school is cool! Lambda school is cool! Lambda school is cool! 
+    Lambda school is cool! Lambda school is cool! Lambda school is cool! Lambda school is cool! 
+    Lambda school is cool! Lambda school is cool! Lambda school is cool! Lambda school is cool! `,
   }
 ];
 
@@ -99,6 +112,7 @@ const data = [
     <p class="date">{date of the article}</p>
 
     {three separate paragraph elements}
+    
 
     <span class="expandButton">+</span>
   </div>
@@ -114,3 +128,44 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+function articleMaker(article) {
+  const { title, date, firstParagraph, secondParagraph, thirdParagraph } = article;
+  const container = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const parOne = document.createElement('p');
+  const parTwo = document.createElement('p');
+  const parThree = document.createElement('p');
+  const button = document.createElement('span');
+
+  container.appendChild(articleTitle);
+  container.appendChild(articleDate);
+  container.appendChild(parOne);
+  container.appendChild(parTwo);
+  container.appendChild(parThree);
+  container.appendChild(button);
+
+  container.className = 'article';
+  articleDate.className = 'date';
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  parOne.textContent = firstParagraph;
+  parTwo.textContent = secondParagraph;
+  parThree.textContent = thirdParagraph;
+  button.className = 'expandButton';
+  button.textContent = '+';
+
+  button.addEventListener('click', event => {
+    container.classList.toggle('article-open');
+  })
+
+
+  return container;
+}
+const articles = document.querySelector('.articles');
+
+data.forEach(dataObj => {
+  articles.appendChild(articleMaker(dataObj));
+})
+
+
